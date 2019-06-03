@@ -108,7 +108,7 @@ const init = async() => {
 }
 init()
 
-//Abre na porta 3000 e verifica se tem algum erro
+//Abre na porta 3000 e verifica se tem algum erro. Se não houverem erros, significa que a requisição foi executada com sucesso
 app.listen(3000, (erro) => {
     if(erro){
         console.log('Não foi possível iniciar o servidor Jobify.')
