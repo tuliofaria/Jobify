@@ -7,6 +7,9 @@ const bodyParser = require('body-parser')
 const sqlite = require('sqlite')
 const dbConnection = sqlite.open('banco.sqlite', { Promise })
 
+//configuração necessaria para colocar a aplicação no ar. Recebe um valor da variavel de ambiente do zeit.co
+const port = process.env.PORT || 3000
+
 //Inicializando módulos de terceiros. Precisamos da dependencia "EJS" para rodar a aplicação
 app.set('view engine', 'ejs')       //EJS trabalha com templates de HTML
 app.use(express.static('public'))   //Se não achar nada depois da barra "/", pega o que tiver na pasta public
@@ -109,7 +112,7 @@ const init = async() => {
 init()
 
 //Abre na porta 3000 e verifica se tem algum erro. Se não houverem erros, significa que a requisição foi executada com sucesso
-app.listen(3000, (erro) => {
+app.listen(port, (erro) => {
     if(erro){
         console.log('Não foi possível iniciar o servidor Jobify.')
     }else{
