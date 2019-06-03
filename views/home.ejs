@@ -1,0 +1,15 @@
+
+        <%- include('header') %> <!-- Inclui uma uma página parcial(header) para dentro da página atual -->
+        <h2>Open Roles:</h2>
+        <% categorias.forEach( categoria => { %>
+        <div>
+            <h3><%- categoria.categoria %></h3>
+            <ul>
+                <% categoria.vagas.forEach( vaga => { %>
+                <li><a href="vaga/<%- vaga.id %>"><%- vaga.titulo %></a></li> <!-- A tag <a href=""></a> cria uma ancora/link para outra pagina -->
+                <% }) %>
+            </ul>
+        </div>
+        <% }) %>
+        <%- include('footer') %> <!-- Inclui uma uma página parcial(footer) para dentro da página atual -->
+
