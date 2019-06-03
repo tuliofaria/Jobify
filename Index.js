@@ -3,9 +3,11 @@ const express = require('express')      //Express trabalha com request/response
 const app = express()       //Cria uma nova aplicação Express
 const bodyParser = require('body-parser')
 
+const path = require('path')
+
 //Criandp uma nova conexão com o banco de dados sqlite
 const sqlite = require('sqlite')
-const dbConnection = sqlite.open('banco.sqlite', { Promise })
+const dbConnection = sqlite.open(path.resolve(__dirname, 'banco.sqlite'), { Promise })
 
 //configuração necessaria para colocar a aplicação no ar. Recebe um valor da variavel de ambiente do zeit.co
 const port = process.env.PORT || 3000
