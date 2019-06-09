@@ -73,7 +73,7 @@ app.get('/admin/vagas/nova', async(request, response) => {
 app.post('/admin/vagas/nova', async(request, response) => {
     const {titulo, descricao, categoria} = request.body
     const db = await dbConnection
-    await db.run(`insert into vagas(categoria, titulo, descicao) values('${categoria}', '${titulo}', '${descricao}')`)
+    await db.run(`insert into vagas(categoria, titulo, descricao) values('${categoria}', '${titulo}', '${descricao}')`)
     response.redirect('/admin/vagas')
 })
 
@@ -89,27 +89,31 @@ app.get('/admin/vagas/editar/:id', async(request, response) => {
 })
 app.post('/admin/vagas/editar/:id', async(request, response) => {
     const {titulo, descricao, categoria} = request.body
-    const {id} = request.param
+    const {id} = request.params
     const db = await dbConnection
-    await db.run(`update vagas categoria = ${categoria}, titulo = '${titulo}' , descicao = '${descricao}' where id = ${id}`)
+    await db.run(`update vagas set categoria = ${categoria}, titulo = '${titulo}' , descricao = '${descricao}' where id = ${id}`)
     response.redirect('/admin/vagas')
 })
 
 //criando a tabela no banco de dados
 const init = async() => {
     const db = await dbConnection   //espera a conexcao ficar pronta
+    //await db.run(`drop table categorias`)
+    //await db.run(`drop table vagas`)
     await db.run('create table if not exists categorias (id INTEGER PRIMARY KEY, categoria TEXT);')     //cria tabela categorias no banco de dados
     //const categoria = 'Engineering Team'
-    await db.run('create table if not exists vagas (id INTEGER PRIMARY KEY, categoria INTEGER, titulo TEXT, descicao TEXT);')     //cria tabela vagas no banco de dados
+    await db.run('create table if not exists vagas (id INTEGER PRIMARY KEY, categoria INTEGER, titulo TEXT, descricao TEXT);')     //cria tabela vagas no banco de dados
     //const categoria = 'Marketing Team'
     //await db.run(`insert into categorias(categoria) values('${categoria}')`)    //insere uma linha na tabela do bd, comado no formato template string
+    //await db.run(`delete from categorias where id = 2`)
     //const vaga = 'Fullstack Develloper (Remoto)'
     //const descricao = 'Vaga para fullstack developer que fez o FullStack Lab no DevPleno'
-    //const vaga = 'Marketing Digital (San Francisco)'
+    //const vaga = 'Digital Marketing (San Francisco)'
     //const descricao = 'Vaga para fullstack developer que fez o FullStack Lab no DevPleno'
-    const vaga = 'Social Media (San Francisco)'
-    const descricao = 'Vaga para fullstack developer que fez o FullStack Lab no DevPleno'
-    //await db.run(`insert into vagas(categoria, titulo, descicao) values(2, '${vaga}', '${descricao}')`)    //insere uma linha na tabela do bd comado no formato template string
+    //const vaga = 'Social Media (San Francisco)'
+    //const descricao = 'Vaga para fullstack developer que fez o FullStack Lab no DevPleno'
+    //await db.run(`insert into vagas(categoria, titulo, descricao) values(2, '${vaga}', '${descricao}')`)    //insere uma linha na tabela do bd comado no formato template string
+    //await db.run(`delete from vagas where id = 2`)
 }
 init()
 
